@@ -15,10 +15,13 @@ export default function ItemModal({ id, data, onClose }: itemsModalProps) {
       role="dialog"
       aria-modal="true"
       onClick={onClose}
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
     >
       <div
-        onClick={(e) => e.stopPropagation()} 
+        onClick={(e) => e.stopPropagation()}
+        className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full"
       >
+
         <Button
           aria-label="Close"
           onClick={onClose}
@@ -32,11 +35,7 @@ export default function ItemModal({ id, data, onClose }: itemsModalProps) {
           {data.title}
         </h2>
         <p>{data.brand}</p>
-
-          <Button onClick={onClose}>
-            Cancel
-          </Button>
-        </div>
       </div>
+    </div>
   );
 }
