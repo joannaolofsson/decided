@@ -8,7 +8,7 @@ export default function Navbar() {
   const handleClick = () => setIsOpen(!isOpen);
 
   return (
-    <div className="flex items-center justify-between h-16 px-4 border-b">
+    <div className="flex items-center justify-between h-16 px-4 bg-white shadow-md">
      
       {/* Hamburger on the left */}
       <button

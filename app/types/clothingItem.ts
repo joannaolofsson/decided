@@ -4,7 +4,7 @@ export interface ClothingItem {
   title: string;
   brand: string;
   imageUrl: string;
-  status?: "owned" | "wishlist";
+  owned?: boolean;
   size?: string;
   price?: number;
   created_at?: string;

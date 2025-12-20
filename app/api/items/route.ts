@@ -4,7 +4,7 @@ export async function GET() {
   console.log("✅ /api/items hit")
 
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     console.log("✅ Supabase client created")
 
     const { data, error } = await supabase
