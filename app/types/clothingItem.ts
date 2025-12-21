@@ -11,3 +11,10 @@ export interface ClothingItem {
   user_id?: string;
 }
 
+export interface FilterState {
+    owned: boolean | null; // null = all, true = owned, false = wishlist
+    brand: string;
+    maxPrice: number;
+}
+
+
