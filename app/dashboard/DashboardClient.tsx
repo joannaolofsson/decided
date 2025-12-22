@@ -59,7 +59,7 @@ export default function DashboardClient() {
 
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="self-center font-serif text-3xl tracking-normal pt-4">My decided Wardrobe</h1>
+      <h1 className="self-center font-serif text-2xl md:text-[clamp(2.25rem,3vw,3rem)] font-normal tracking-normal text-foreground p-4">My decided Wardrobe</h1>
       <StickySecondBar 
       showFilterMenu={showFilterMenu} 
       setShowFilterMenu={setShowFilterMenu} 
@@ -68,7 +68,7 @@ export default function DashboardClient() {
       availableBrands={[...new Set(allItems.map(item => item.brand))]}
       />
 
-      <div className="grid grid-cols-4 gap-4 px-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-8">
         {filteredItems.map((item) => (
           <Card
             key={item.id}
@@ -87,8 +87,6 @@ export default function DashboardClient() {
           onClose={handleCloseModal}
         />
       )}
-
-      
     </div>
   );
 }

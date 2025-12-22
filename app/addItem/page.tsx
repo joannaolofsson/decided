@@ -3,6 +3,7 @@ import { useState } from "react";
 import Button from "../components/ui/Button";
 import Link from "next/link";
 import { createClient } from "../../lib/supabase/client";
+import { PiCaretLeftBold, PiUploadSimpleLight } from "react-icons/pi";
 
 export default function AddItem() {
   const [file, setFile] = useState<File | null>(null);
@@ -11,10 +12,24 @@ export default function AddItem() {
   const [owned, setOwned] = useState(false);
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
+  const [errors, setErrors] = useState<any>({});
 
   const supabase = createClient();
 
   const handleSubmit = async () => {
+    const newErrors: any = {};
+    if (!title.trim())
+      newErrors.title = "Name is required";
+    if (!brand.trim())
+      newErrors.brand = "Brand is required";
+    if (!size.trim())
+      newErrors.size = "Size is required";
+    if (!price.trim())
+      newErrors.price = "Price is required";
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
     // 1. Get logged-in user
     const {
       data: { user },
@@ -72,21 +87,28 @@ export default function AddItem() {
     window.location.href = "/dashboard";
   };
 
-
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-8 p-4">
-      <Link href="/dashboard">Back to Dashboard</Link>
-      <h2 className="text-3xl font-serif">Add item to list</h2>
+    <div className="min-h-screen flex flex-col items-center justify-center p-4">
+      <Link href="/dashboard" className="flex flex-row self-start text-foreground"><PiCaretLeftBold size="1.1rem" className="mr-2 pt-2" />Back to Dashboard</Link>
+      <h2 className="font-serif text-2xl md:text-[clamp(2.25rem,3vw,3rem)] font-normal tracking-normal text-foreground p-4">Add item to list</h2>
 
-      <div className="flex flex-col p-4 gap-4 w-1/3">
-        <label>Image</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-          className="border p-2"
-        />
+
+      <div className="w-full max-w-md flex flex-col gap-4 text-left">
+        <div className="flex flex-row justify-start items-center gap-4 py-4">
+          <label>Upload image</label>
+          <label htmlFor="file-upload" className="cursor-pointer">
+            <PiUploadSimpleLight size="1.5rem" className="text-[#C084FC] mt-1" />
+          </label>
+
+          <input
+            id="file-upload"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+            className="hidden"
+          />
+        </div>
+
         {file && (
           <img
             src={URL.createObjectURL(file)}
@@ -95,16 +117,17 @@ export default function AddItem() {
           />
         )}
 
-        <label>Title</label>
+        <label>Name item</label>
         <input
-          className="border p-2"
+          className="border-b border-b-[#cbd1d8] p-2"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+        {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
 
         <label>Brand</label>
         <input
-          className="border p-2"
+          className="border-b border-b-[#cbd1d8] p-2"
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
         />
@@ -119,6 +142,16 @@ export default function AddItem() {
               value="true"
               checked={owned === true}
               onChange={() => setOwned(true)}
+              className="
+                appearance-none
+                h-4 w-4
+                rounded-full
+                border border-gray-400
+                checked:bg-[#C084FC]
+                checked:border-[#C084FC]
+                checked:ring-2
+                checked:ring-[#C084FC]/40
+              "
             />
             Owned
           </label>
@@ -130,15 +163,25 @@ export default function AddItem() {
               value="false"
               checked={owned === false}
               onChange={() => setOwned(false)}
+              className="
+                appearance-none
+                h-4 w-4
+                rounded-full
+                border border-gray-400
+                checked:bg-[#C084FC]
+                checked:border-[#C084FC]
+                checked:ring-2
+                checked:ring-[#C084FC]/40
+              "
             />
             Not owned
           </label>
         </div>
 
 
-        <label>Size</label>
+        <label className=" pt-4">Size</label>
         <input
-          className="border p-2"
+          className="border-b border-b-[#cbd1d8] p-2"
           value={size}
           onChange={(e) => setSize(e.target.value)}
         />
@@ -146,16 +189,16 @@ export default function AddItem() {
         <label>Price</label>
         <input
           type="number"
-          className="border p-2"
+          className="border-b border-b-[#cbd1d8] p-2"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
 
-        <div className="flex gap-4">
-          <Button variant="primary" onClick={handleSubmit}>Submit</Button>
+        <div className="flex gap-4 mt-4 justify-end">
           <Button variant="glass" onClick={() => window.location.reload()}>
             Reset
           </Button>
+          <Button variant="primary" onClick={handleSubmit}>Submit</Button>
         </div>
       </div>
     </div>

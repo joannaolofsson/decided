@@ -35,14 +35,14 @@ export default function AppHome() {
   }
 
   return (
-    <main className="flex flex-col justify-center align-center">
-      <h3 className="text-2xl self-center"> “Welcome name X” </h3>
+
+    <div className="flex flex-col justify-center align-center p-8 gap-8">
+      
       {session ? (
         <>
-        <Button variant="secondary" onClick={logout}>Logout</Button>
         <Dashboard />
         </>
       ) : <Auth />}
-    </main>
+    </div>
   )
 }

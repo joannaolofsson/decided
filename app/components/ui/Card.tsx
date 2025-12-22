@@ -11,7 +11,7 @@ export interface CardProps {
 export default function Card({ title, brand, imageUrl, onClick }: CardProps) {
   return (
     <div
-      className="rounded-lg shadow p-4 cursor-pointer"
+      className=" shadow p-4 cursor-pointer"
       onClick={onClick}
     >
       <img src={imageUrl} alt={title} className="w-full h-40 object-cover rounded" />
