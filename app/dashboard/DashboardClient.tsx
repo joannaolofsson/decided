@@ -3,10 +3,9 @@ import { useState, useEffect, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Card from "../components/ui/Card";
 import ItemModal from "../components/ItemModal";
-import Button from "../components/ui/Button";
-import Link from "next/link";
 import { ClothingItem } from "../types/clothingItem";
-import FilterMenu from "../components/FilterMenu";
+import StickySecondBar from "../components/Navbar/StickySecondBar";
+
 
 export default function DashboardClient() {
   const [showFilterMenu, setShowFilterMenu] = useState(false);
@@ -44,9 +43,7 @@ export default function DashboardClient() {
     router.push("/dashboard");
   };
 
-  const handlecloseFilterMenu = () => {
-    setShowFilterMenu(false);
-  };
+
 
   useEffect(() => {
     fetch('/api/items')
@@ -61,18 +58,17 @@ export default function DashboardClient() {
 
 
   return (
-    <div className="flex flex-col gap-8 p-8">
-      <h1 className="text-4xl self-center">My decided Wardrobe</h1>
+    <div className="flex flex-col gap-8">
+      <h1 className="self-center font-serif text-3xl tracking-normal pt-4">My decided Wardrobe</h1>
+      <StickySecondBar 
+      showFilterMenu={showFilterMenu} 
+      setShowFilterMenu={setShowFilterMenu} 
+      filters={filters} 
+      setFilters={setFilters} 
+      availableBrands={[...new Set(allItems.map(item => item.brand))]}
+      />
 
-      <div className="flex flex-row justify-between">
-        <Link href="/addItem">Add +</Link>
-        <Button variant="ghost" onClick={() => setShowFilterMenu(!showFilterMenu)}>
-          {showFilterMenu ? "Close Filters" : "Filter"}
-        </Button>
-
-      </div>
-
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-4 px-8">
         {filteredItems.map((item) => (
           <Card
             key={item.id}
@@ -92,18 +88,7 @@ export default function DashboardClient() {
         />
       )}
 
-      {showFilterMenu && (
-        <div className="fixed top-0 right-0 h-full w-[300px] bg-white shadow-lg z-50 p-6 transition-transform duration-300">
-          <FilterMenu
-            filters={filters}
-            setFilters={setFilters}
-            availableBrands={[...new Set(allItems.map(item => item.brand))]}
-            onApply={() => setShowFilterMenu(false)}
-            onReset={() => setFilters({ owned: null, brand: "", maxPrice: Infinity })}
-            onClose={handlecloseFilterMenu}
-          />
-        </div>
-      )}
+      
     </div>
   );
 }

@@ -8,16 +8,16 @@ export default function Navbar() {
   const handleClick = () => setIsOpen(!isOpen);
 
   return (
-    <div className="relative">
+    <nav className="relative">
       {/* Navbar row */}
-      <div className="flex items-center justify-between h-16 px-4 bg-white shadow-md z-10 relative">
+      <div className="flex items-center justify-between h-16 px-4 bg-white z-10 relative">
         {/* Hamburger on the left */}
         <button
           onClick={handleClick}
           className="flex flex-col justify-center items-center h-12 w-12"
         >
           <span
-            className={`bg-neutral-900 block transition-all duration-300 ease-out 
+            className={`color-foreground block transition-all duration-300 ease-out 
               h-0.5 w-6 rounded-sm ${isOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'}`}
           />
           <span
@@ -31,8 +31,8 @@ export default function Navbar() {
         </button>
 
         {/* Center logo */}
-        <div className="flex-1 flex justify-center text-xl font-bold pointer-events-none">
-          <Link href="/dashboard" className="block pointer-events-auto">
+        <div className="flex-1 flex justify-center align-center text-xl font-bold pointer-events-none">
+          <Link href="/dashboard" className="block pointer-events-auto uppercase text-4xl font-bold tracking-widest text-foreground pr-8">
             Decided
           </Link>
         </div>
@@ -49,6 +49,6 @@ export default function Navbar() {
           </Link>
         </div>
       )}
-    </div>
+    </nav>
   );
 }

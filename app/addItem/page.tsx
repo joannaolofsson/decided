@@ -77,9 +77,9 @@ export default function AddItem() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 p-4">
       <Link href="/dashboard">Back to Dashboard</Link>
-      <h2 className="text-2xl">Add item to list</h2>
+      <h2 className="text-3xl font-serif">Add item to list</h2>
 
-      <div className="flex flex-col bg-slate-200 p-4 gap-4 w-1/3">
+      <div className="flex flex-col p-4 gap-4 w-1/3">
         <label>Image</label>
         <input
           type="file"
@@ -152,8 +152,8 @@ export default function AddItem() {
         />
 
         <div className="flex gap-4">
-          <Button onClick={handleSubmit}>Submit</Button>
-          <Button variant="ghost" onClick={() => window.location.reload()}>
+          <Button variant="primary" onClick={handleSubmit}>Submit</Button>
+          <Button variant="glass" onClick={() => window.location.reload()}>
             Reset
           </Button>
         </div>
