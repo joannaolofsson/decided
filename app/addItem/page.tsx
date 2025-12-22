@@ -88,14 +88,13 @@ export default function AddItem() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      <Link href="/dashboard" className="flex flex-row self-start text-foreground"><PiCaretLeftBold size="1.1rem" className="mr-2 pt-2" />Back to Dashboard</Link>
-      <h2 className="font-serif text-2xl md:text-[clamp(2.25rem,3vw,3rem)] font-normal tracking-normal text-foreground p-4">Add item to list</h2>
-
+    <div className="min-h-screen flex flex-col items-center justify-center px-8 py-2">
+      <Link href="/dashboard" className="flex flex-row self-start text-foreground mb-4"><PiCaretLeftBold size="1.1rem" className="mr-2 pt-2" />Back to Dashboard</Link>
+      <h2 className="font-serif text-2xl md:text-[clamp(2.25rem,3vw,3rem)] font-normal tracking-normal text-foreground">Add item to list</h2>
 
       <div className="w-full max-w-md flex flex-col gap-4 text-left">
         <div className="flex flex-row justify-start items-center gap-4 py-4">
-          <label>Upload image</label>
+          <label className="mt-4">Upload image</label>
           <label htmlFor="file-upload" className="cursor-pointer">
             <PiUploadSimpleLight size="1.5rem" className="text-[#C084FC] mt-1" />
           </label>
